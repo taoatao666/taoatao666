@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="将本地jar包引入maven仓库命令1234mvn install:install-file -DgroupId&#x3D;sfzk -DartifactId&#x3D;canal -Dversion&#x3D;0.0.1 -Dpackaging&#x3D;jar -Dfile&#x3D;D:\project\java-code\java-canal\target\canal-0.0.1.jar-Dfile 后跟着的是jar的地址  注意 若引用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://taoatao666.github.io/2023/07/27/%E6%9C%AC%E5%9C%B0jar%E5%8C%85%E5%BC%95%E5%85%A5maven%E4%BB%93%E5%BA%93%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="将本地jar包引入maven仓库命令1234mvn install:install-file -DgroupId&#x3D;sfzk -DartifactId&#x3D;canal -Dversion&#x3D;0.0.1 -Dpackaging&#x3D;jar -Dfile&#x3D;D:\project\java-code\java-canal\target\canal-0.0.1.jar-Dfile 后跟着的是jar的地址  注意 若引用">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-07-27T02:46:42.223Z">
+<meta property="article:modified_time" content="2023-07-25T09:08:10.759Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://taoatao666.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-本地jar包引入maven仓库命令" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/07/27/%E6%9C%AC%E5%9C%B0jar%E5%8C%85%E5%BC%95%E5%85%A5maven%E4%BB%93%E5%BA%93%E5%91%BD%E4%BB%A4/" class="article-date">
+  <time class="dt-published" datetime="2023-07-27T02:46:42.223Z" itemprop="datePublished">2023-07-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="将本地jar包引入maven仓库命令"><a href="#将本地jar包引入maven仓库命令" class="headerlink" title="将本地jar包引入maven仓库命令"></a>将本地jar包引入maven仓库命令</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mvn install:install-file -DgroupId=sfzk -DartifactId=canal -Dversion=0.0.1 -Dpackaging=jar -Dfile=D:\project\java-code\java-canal\target\canal-0.0.1.jar</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">-Dfile 后跟着的是jar的地址</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong></p>
+<p>若引用后的jar包，pom中不报错，但项目中使用时import爆红</p>
+<p>打包时应使用如下配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;build&gt;</span><br><span class="line">    &lt;plugins&gt;</span><br><span class="line">        &lt;plugin&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">            &lt;configuration&gt;</span><br><span class="line">                &lt;includeSystemScope&gt;true&lt;/includeSystemScope&gt;</span><br><span class="line">                &lt;skip&gt;true&lt;/skip&gt;</span><br><span class="line">            &lt;/configuration&gt;</span><br><span class="line">        &lt;/plugin&gt;</span><br><span class="line">    &lt;/plugins&gt;</span><br><span class="line">&lt;/build&gt;</span><br></pre></td></tr></table></figure>
+
+<p>pom依赖引入写法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;sfzk&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;canal&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;0.0.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>对应maven仓库中位置</p>
+<p>sfzk-&gt;canal-&gt;0.0.1 以上为文件夹</p>
+<p>最后一级文件夹中存放jar包</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://taoatao666.github.io/2023/07/27/%E6%9C%AC%E5%9C%B0jar%E5%8C%85%E5%BC%95%E5%85%A5maven%E4%BB%93%E5%BA%93%E5%91%BD%E4%BB%A4/" data-id="clkkjzv9t00007kvh0o430paf" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/07/27/%E4%BB%A3%E7%A0%81%E4%B8%8A%E4%BC%A0gitee%E6%96%B9%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/07/27/SpringBoot%E9%9B%86%E6%88%90WebSocket/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/07/27/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3%E5%8A%A0AOP%E5%88%87%E9%9D%A2%E8%AE%B0%E5%BD%95%E6%97%A5%E5%BF%97/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/27/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/27/%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%9F%BA%E6%9C%AC%E7%9A%84SpringBoot%E9%A1%B9%E7%9B%AE/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/27/%E5%8F%91%E9%80%81post%E8%AF%B7%E6%B1%82%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8Java%E6%8E%A5%E5%8F%A3%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/27/%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8%E5%B7%A5%E5%85%B7%E7%B1%BB/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
