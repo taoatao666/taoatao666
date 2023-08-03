@@ -73,6 +73,65 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-docker安装" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/03/docker%E5%AE%89%E8%A3%85/" class="article-date">
+  <time class="dt-published" datetime="2023-08-03T01:57:05.000Z" itemprop="datePublished">2023-08-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/08/03/docker%E5%AE%89%E8%A3%85/">docker安装</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1、卸载docker"><a href="#1、卸载docker" class="headerlink" title="1、卸载docker"></a>1、卸载docker</h2><p>注：防止过去安装的docker对重新安装造成影响</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">yum remove docker \</span><br><span class="line">     docker-client \</span><br><span class="line">     docker-client-latest \</span><br><span class="line">     docker-common \</span><br><span class="line">     docker-latest \</span><br><span class="line">     docker-latest-logrotate \</span><br><span class="line">     docker-logrotate \</span><br><span class="line">     docker-engine</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、安装epel更新源"><a href="#2、安装epel更新源" class="headerlink" title="2、安装epel更新源"></a>2、安装epel更新源</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y epel-release</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、安装软件包"><a href="#3、安装软件包" class="headerlink" title="3、安装软件包"></a>3、安装软件包</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、添加国内源"><a href="#4、添加国内源" class="headerlink" title="4、添加国内源"></a>4、添加国内源</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
+
+<h2 id="5、安装docker"><a href="#5、安装docker" class="headerlink" title="5、安装docker"></a>5、安装docker</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 默认安装最新版本docker</span><br><span class="line">yum install -y docker-ce docker-ce-cli containerd.io</span><br><span class="line"></span><br><span class="line"># 此处安装指定版本docker</span><br><span class="line">yum install -y docker-ce-19.03.9-3.el7 docker-ce-cli-19.03.9-3.el7 containerd.io</span><br><span class="line"></span><br><span class="line"># 安装docker命令补全工具</span><br><span class="line">yum install -y bash-completion</span><br></pre></td></tr></table></figure>
+
+<h2 id="6、配置镜像加速器"><a href="#6、配置镜像加速器" class="headerlink" title="6、配置镜像加速器"></a>6、配置镜像加速器</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 启动docker服务</span><br><span class="line">systemctl start docker</span><br><span class="line"># 这里会在/etc/docker/daemon.json文件中添加镜像配置</span><br><span class="line">tee /etc/docker/daemon.json &lt;&lt; eof</span><br><span class="line">&#123;</span><br><span class="line">    &quot;registry-mirrors&quot;: [</span><br><span class="line">        &quot;https://1nj0zren.mirror.aliyuncs.com&quot;,</span><br><span class="line">        &quot;https://docker.mirrors.ustc.edu.cn&quot;,</span><br><span class="line">        &quot;http://f1361db2.m.daocloud.io&quot;,</span><br><span class="line">        &quot;https://registry.docker-cn.com&quot;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">eof</span><br></pre></td></tr></table></figure>
+
+<h2 id="7、修改docker镜像默认存储位置"><a href="#7、修改docker镜像默认存储位置" class="headerlink" title="7、修改docker镜像默认存储位置"></a>7、修改docker镜像默认存储位置</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># docker的默认存储位置是 /var/lib/docker/ </span><br><span class="line">docker info # 查看docker当前信息</span><br><span class="line"># 在/etc/docker/daemon.json文件中添加镜像下载地址</span><br><span class="line">&quot;data-root&quot;: &quot;/vdb/docker_images&quot;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># /etc/docker/daemon.json 文件详细内容</span><br><span class="line">&#123;</span><br><span class="line">    &quot;registry-mirrors&quot;: [</span><br><span class="line">        &quot;https://1nj0zren.mirror.aliyuncs.com&quot;,</span><br><span class="line">        &quot;https://docker.mirrors.ustc.edu.cn&quot;,</span><br><span class="line">        &quot;http://f1361db2.m.daocloud.io&quot;,</span><br><span class="line">        &quot;https://registry.docker-cn.com&quot;</span><br><span class="line">    ],</span><br><span class="line">    &quot;data-root&quot;: &quot;/usr/local/docker_images&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="8、重载配置文件并重启"><a href="#8、重载配置文件并重启" class="headerlink" title="8、重载配置文件并重启"></a>8、重载配置文件并重启</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 重新加载配置</span><br><span class="line">systemctl daemon-reload</span><br><span class="line"></span><br><span class="line"># 重新启动docker</span><br><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure>
+
+<h2 id="9、docker常用命令一览"><a href="#9、docker常用命令一览" class="headerlink" title="9、docker常用命令一览"></a>9、docker常用命令一览</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># 修改配置文件后，需要重载systemctl配置</span><br><span class="line">systemctl daemon-reload</span><br><span class="line"></span><br><span class="line"># 停止docker服务</span><br><span class="line">systemctl stop docker</span><br><span class="line"></span><br><span class="line"># 启动docker服务</span><br><span class="line">systemctl start docker</span><br><span class="line"></span><br><span class="line"># 开机自启docker服务</span><br><span class="line">systemctl enable docker</span><br><span class="line"></span><br><span class="line"># 重载docker服务</span><br><span class="line">systemctl restart docker</span><br><span class="line"></span><br><span class="line"># 查看docker服务状态</span><br><span class="line">systemctl status docker</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://taoatao666.github.io/2023/08/03/docker%E5%AE%89%E8%A3%85/" data-id="clkuimzq00000t8vhatlv1za5" data-title="docker安装" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-hexo常用命令" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/07/27/hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="article-date">
@@ -1216,53 +1275,6 @@
 
 
   
-    <article id="post-数据库操作命令" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/07/26/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4/" class="article-date">
-  <time class="dt-published" datetime="2023-07-26T09:11:48.000Z" itemprop="datePublished">2023-07-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/07/26/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4/">数据库操作命令</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="数据库操作命令"><a href="#数据库操作命令" class="headerlink" title="数据库操作命令"></a>数据库操作命令</h1><h2 id="解决数据库报错连接数过多"><a href="#解决数据库报错连接数过多" class="headerlink" title="解决数据库报错连接数过多"></a>解决数据库报错连接数过多</h2><h3 id="一、手动杀死空闲的连接数（治标不治本）"><a href="#一、手动杀死空闲的连接数（治标不治本）" class="headerlink" title="一、手动杀死空闲的连接数（治标不治本）"></a>一、手动杀死空闲的连接数（治标不治本）</h3><h4 id="1、查找数据库连接数"><a href="#1、查找数据库连接数" class="headerlink" title="1、查找数据库连接数"></a>1、查找数据库连接数</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">SHOW  processlist # 列出前一百条</span><br><span class="line">SHOW full PROCESSLIST; # 列出全部</span><br><span class="line"></span><br><span class="line">#运行结果</span><br><span class="line">7626	root	36.106.66.206:3058	tunnel2023	Sleep	7749		</span><br><span class="line">7639	root	36.106.66.206:3381	tunnel2023	Sleep	7732		</span><br><span class="line">7657	root	36.106.66.206:3257	tunnel2023	Sleep	7430		</span><br><span class="line">7658	root	36.106.66.206:3540	tunnel2023	Sleep	7394		</span><br><span class="line">7675	root	36.106.66.206:4851	tunnel2023	Sleep	7301		</span><br><span class="line">7676	root	36.106.66.206:4855	tunnel2023	Sleep	7301		</span><br><span class="line">7694	root	36.106.66.206:1066	tunnel2023	Sleep	7017		</span><br><span class="line">7703	root	36.106.66.206:1294	tunnel2023	Sleep	6994		</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h4 id="2、找到匹配指定IP的连接ID并拼接为kill语句"><a href="#2、找到匹配指定IP的连接ID并拼接为kill语句" class="headerlink" title="2、找到匹配指定IP的连接ID并拼接为kill语句"></a>2、找到匹配指定IP的连接ID并拼接为kill语句</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select concat(&quot;kill &quot;, ID, &quot;;&quot;) as command</span><br><span class="line">from information_schema.PROCESSLIST</span><br><span class="line">where HOST regexp &quot;36.106.66.206&quot;;</span><br></pre></td></tr></table></figure>
-
-<h3 id="二、设置数据库连接等待连接时长（注意配置一个合理的值）"><a href="#二、设置数据库连接等待连接时长（注意配置一个合理的值）" class="headerlink" title="二、设置数据库连接等待连接时长（注意配置一个合理的值）"></a>二、设置数据库连接等待连接时长（注意配置一个合理的值）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 查看当前数据库连接超时时间</span><br><span class="line">show global variables like &#x27;%wait_timeout&#x27;;</span><br><span class="line"># 设置连接超时时间</span><br><span class="line">set global wait_timeout=14400; # 默认八小时，这里缩短了一半（重启数据库后会改为默认值）</span><br></pre></td></tr></table></figure>
-
-<h3 id="三、若项目配置了连接池，注意是否Navicat未设置心跳包，会造成反复重连数据库"><a href="#三、若项目配置了连接池，注意是否Navicat未设置心跳包，会造成反复重连数据库" class="headerlink" title="三、若项目配置了连接池，注意是否Navicat未设置心跳包，会造成反复重连数据库"></a>三、若项目配置了连接池，注意是否Navicat未设置心跳包，会造成反复重连数据库</h3><p>在数据库连接上点击编辑连接</p>
-<p>高级设置</p>
-<p>保持连接间隔（默认120s，建议修改为30s）</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://taoatao666.github.io/2023/07/26/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4/" data-id="clkkjzv9y00077kvh0lhq3bor" data-title="数据库操作命令" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -1286,7 +1298,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li></ul>
     </div>
   </div>
 
@@ -1297,6 +1309,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2023/08/03/docker%E5%AE%89%E8%A3%85/">docker安装</a>
+          </li>
         
           <li>
             <a href="/2023/07/27/hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">hexo常用命令</a>
@@ -1312,10 +1328,6 @@
         
           <li>
             <a href="/2023/07/26/Linux%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Linux 常用命令</a>
-          </li>
-        
-          <li>
-            <a href="/2023/07/26/canal%E5%AE%89%E8%A3%85/">canal安装</a>
           </li>
         
       </ul>
